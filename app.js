@@ -16,64 +16,14 @@ const flickrOptions = {
 
 const FlickrApi = require("flickrapi");
 
-// FlickrApi.authenticate(flickrOptions, (error, flickr) => {
-//   // flickr.photosets.getList({
-//   //   user_id: flickr.options.user_id,
-//   //   authenticated: true
-//   // }, (err, result) => {
-//   //   console.log(err, result);
-//   //   console.log(result.photosets);
-//   //   // return result.photos.photo;
-//   //   // res.json(result.photos.photo);
-//   // });
-//   // flickr.photosets.getPhotos({
-//   //   api_key: process.env.FLICKR_API_KEY,
-//   //   user_id: flickr.options.user_id,
-//   //   photoset_id: 72157685510004936,
-//   //   authenticated: true
-//   //   // page: 1,
-//   //   // per_page: 20
-//   // }, (err, result) => {
-//   //   console.log(err, result);
-//   // });
-//   // flickr.people.getPhotos({
-//   //   api_key: process.env.FLICKR_API_KEY,
-//   //   user_id: flickr.options.user_id,
-//   //   authenticated: true,
-//   //   page: 1,
-//   //   per_page: 500
-//   // }, (err, result) => {
-//   //   console.log(err, result);
-//   // });
-// });
-
-// searchPhotos = (flickr, res) => {
-//   flickr.photos.search({
-//     authenticated: true,
-//     api_key: process.env.FLICKR_API_KEY,
-//     user_id: flickr.options.user_id,
-//     // page: 1,
-//     // per_page: 20
-//   }, (err, result) => {
-//     console.log(err, result);
-//     // console.log(result.photos.photo);
-//     // return result.photos.photo;
-//     res.json(result.photos.photo);
-//   });
-// }
-
-// getAllPhotos = (flickr, res) => {
-//   flickr.people.getPhotos({
-//     api_key: process.env.FLICKR_API_KEY,
-//     user_id: flickr.options.user_id,
-//     authenticated: true,
-//     // page: 1,
-//     // per_page: 500
-//   }, (err, result) => {
-//     console.log(err, result);
-//     res.json(result.photos.photo);
-//   });
-// }
+console.log('Authenticate Flickr API');
+FlickrApi.authenticate(flickrOptions, (error, flickr) => {
+  if (error) {
+    console.log('ERROR', error);
+  } else {
+    console.log('Flickr API authentivated');
+  }
+});
 
 // Get all albums
 app.get('/albums', (req, res, next) => {
