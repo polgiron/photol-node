@@ -21,7 +21,7 @@ FlickrApi.authenticate(flickrOptions, (error, flickr) => {
   if (error) {
     console.log('ERROR', error);
   } else {
-    console.log('Flickr API authentivated');
+    console.log('Flickr API authenticated');
   }
 });
 
@@ -83,23 +83,27 @@ app.get('/photo/:photoId', (req, res, next) => {
       api_key: process.env.FLICKR_API_KEY,
       photo_id: req.params.photoId
     }, (err, result) => {
-      console.log(err, result);
+      // console.log(err, result);
       // console.log(result.photos.photo);
       res.json(result.photo);
     });
   });
 });
 
-// app.get('/photos', (req, res, next) => {
-//   // res.json(["Tony", "Lisa", "Michael", "Ginger", "Food"]);
-//   FlickrApi.authenticate(flickrOptions, (error, flickr) => {
-//     // console.log('error', error);
-//     console.log('Flickr authenticate');
-//     // console.log(flickr);
-//     // searchPhotos(flickr, res);
-//     getAllPhotos(flickr, res);
-//   });
-// });
+// Get a photo context
+app.get('/photo/:photoId/context', (req, res, next) => {
+  FlickrApi.authenticate(flickrOptions, (error, flickr) => {
+    flickr.photos.getInfo({
+      authenticated: true,
+      api_key: process.env.FLICKR_API_KEY,
+      photo_id: req.params.photoId
+    }, (err, result) => {
+      console.log(err, result);
+      // console.log(result.photos.photo);
+      res.json(result.photo);
+    });
+  });
+});
 
 app.listen(3000, () => {
   console.log('Server running on port 3000');
