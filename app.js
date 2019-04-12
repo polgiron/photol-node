@@ -93,14 +93,14 @@ app.get('/photo/:photoId', (req, res, next) => {
 // Get a photo context
 app.get('/photo/:photoId/context', (req, res, next) => {
   FlickrApi.authenticate(flickrOptions, (error, flickr) => {
-    flickr.photos.getInfo({
+    flickr.photos.getAllContexts({
       authenticated: true,
       api_key: process.env.FLICKR_API_KEY,
       photo_id: req.params.photoId
     }, (err, result) => {
       console.log(err, result);
       // console.log(result.photos.photo);
-      res.json(result.photo);
+      res.json(result.set);
     });
   });
 });
