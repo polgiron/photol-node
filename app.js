@@ -49,7 +49,8 @@ app.get('/album/:albumId', (req, res, next) => {
       api_key: process.env.FLICKR_API_KEY,
       user_id: flickr.options.user_id,
       photoset_id: req.params.albumId,
-      extras: 'url_m,tags,title,description'
+      extras: 'url_m,tags'
+      // extras: 'url_m,tags,title,description'
     }, (err, result) => {
       // console.log(err, result);
       // console.log(result.photos.photo);
@@ -101,6 +102,22 @@ app.get('/photo/:photoId/context', (req, res, next) => {
       console.log(err, result);
       // console.log(result.photos.photo);
       res.json(result.set);
+    });
+  });
+});
+
+// Get photostream
+app.get('/photostream', (req, res, next) => {
+  FlickrApi.authenticate(flickrOptions, (error, flickr) => {
+    flickr.people.getPhotos({
+      // authenticated: true,
+      api_key: process.env.FLICKR_API_KEY,
+      user_id: flickr.options.user_id,
+      extras: 'url_m,tags,title,description'
+    }, (err, result) => {
+      console.log(err, result);
+      // console.log(result.photos.photo);
+      res.json(result.photos.photo);
     });
   });
 });
